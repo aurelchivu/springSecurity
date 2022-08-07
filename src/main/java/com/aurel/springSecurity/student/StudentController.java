@@ -13,7 +13,7 @@ import java.util.List;
 public class StudentController {
 
     private static final List<Student> STUDENTS = Arrays.asList(
-            new Student(1, "Aurel Chivu"),
+            new Student(1, "Tom Jones"),
             new Student(2, "James Bond"),
             new Student(3, "John Doe")
     );
