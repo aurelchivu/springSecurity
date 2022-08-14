@@ -23,6 +23,17 @@ public class StudentManagementController {
         return STUDENTS;
     }
 
+    @GetMapping(path = "{studentId}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINTRAINEE')") // hasRole('ROLE_') hasAnyRole('ROLE_') hasAuthority('permission') hasAnyAuthority('permission')
+    public Student getStudent(@PathVariable("studentId") Integer studentId) {
+        System.out.println("getStudent");
+        return STUDENTS.stream()
+            .filter(student -> studentId.equals(student.getStudentId()))
+            .findFirst()
+            .orElseThrow(() -> new IllegalStateException("Student " + studentId + " does not exist"));
+
+    }
+
     @PostMapping
     @PreAuthorize("hasAuthority('student:write')")
     public void registerNewStudent(@RequestBody Student student) {
